@@ -1,0 +1,39 @@
+body{
+	background-color: snow;
+}
+
+.jumbotron{
+	background-image: url(http://cloudlightfpv.com/images/bebop/banner.jpg);
+	background-color: transparent;
+	color: royalblue;
+	width: 100%;
+	margin: auto;
+
+}
+
+.mySlides{
+	width: 90%;
+	margin: auto;
+}
+
+.exampleInputPassword1{
+	color: royalblue;
+}
+.form-group{
+	color: royalblue;
+}
+.form-check{
+	color: royalblue;
+}
+.form-required{
+	color: red !important;
+}
+
+footer{
+	text-align: center;
+}
+
+#foot{
+	width: 15%;
+	height: 15%;
+}	

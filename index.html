@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Concierge-Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="icon" type="image/gif" href="http://www.droiders.com/wp-content/uploads/concierge-1.jpg"/>
+</head>
+
+<body>
+
+ <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">The Concierge</h1>
+    <p class="lead">Be adventurous. Try something fun. Discover something new. Let Concierge pick your weekend.</p>
+  </div>
+</div>
+
+<nav class="navbar navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">The Concierge</a>
+    </div>
+    <!-- <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Random Fun Locations</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <span class="caret"></span></a> -->
+       <!--  <ul class="dropdown-menu">
+          <li><a href="#">Los Angeles</a></li>
+          <li><a href="#">New York</a></li>
+          <li><a href="#">Dallas</a></li>
+        </ul> -->
+      <!-- </li>
+      <li><a href="#"></a></li>
+      <li><a href="#">Special Promos (subject to change)</a></li>
+    </ul> -->
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</div>
+
+
+<div class="w3-content w3-display-container" >  <br>
+  <div id="myCarousel">
+  <!-- <img class="mySlides" src="http://stellartravel.com/wordpress/wp-content/uploads/2011/06/vacation-final.jpg"> -->
+  <img class="mySlides" src="https://masmedicalstaffing.com/wp-content/uploads/2014/02/hawaii-travel-jobs2.jpg">
+  <img class="mySlides" src="https://www.overwaterbungalows.net/wp-content/uploads/2016/04/turquoise-waters.jpg">
+  <img class="mySlides" src="https://dx-world.net/wp-content/uploads/2017/03/Paradise-Island-New-Providence-The-Bahamas.jpg">
+    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+</div>
+</div>
+
+
+<br>
+<div class = "container" id = "userInput">
+  <form>
+    <div class="form-group">
+      <label for="key-word" id = "popSearch">Popular Search</label>
+      <input type="text" id = "key-word" class = "form-control" placeholder="Concerts, art, etc."> 
+    </div>
+    <div class="form-group">
+      <label for="address" id = "zipSearch">Zip Code</label>
+      <input type="text"  id = "address"  class = "form-control" placeholder="5 Digits"> 
+    </div>
+    <div class="form-group">
+      <label for="start_date" id = "startDateSearch">Start Date</label>
+      <input type="date" id = "start_date" class = "form-control"> 
+    </div>
+    <div class="form-group">
+      <label for="end_date" id = "endDateSearch">End Date</label>
+      <input type="date" id = "end_date" class = "form-control"> 
+    </div>
+  </form>
+
+  <form id = "userCate">
+        <input type="checkbox" id = "music" value = "103" >Music <br>
+        <input type="checkbox" id = "hobbies" value = "101">Business and Professional <br>
+        <input type="checkbox" id = "music" value = "110">Food and Drink
+  </form><br>
+
+  <button class = "btn btn-primary" id = "submit-me" type = "button">Submit</button>
+</div>
+
+
+<div class = "container">
+  <div class = "row">
+    <div id = "weatherOut">
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div id = "eventOut" class="col-md-6"> 
+    </div>
+    <div id="seatOut" class="col-md-6">
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+
+//EventBrite API Key: "C3Y4UW6PHVTZ3JPGDSWF" 
+
+
+
+
+
+  var myArray = [];
+
+  function cateFunction() {
+      var categories = document.forms[1];
+      
+      for (var i = 0; i < categories.length; i++) {
+          if (categories[i].checked) {
+            myArray.push(categories[i].value);
+          }
+      }
+  }
+
+  
+  
+  $("#submit-me").on("click", function(){
+    event.preventDefault();
+    $("#weatherOut").empty();
+    $("#eventOut").empty();
+    
+    myArray = [];
+
+    cateFunction();
+
+    var categoriesJoined = myArray.join();
+    var categoriesList = "categories=" + categoriesJoined;
+
+    var searchTerm = $("#key-word").val().trim();
+    var urlTerm = "q=" + searchTerm;
+
+    var searchAddress = $("#address").val().trim();
+    var urlAddress = "location.address=" + searchAddress;
+
+    var searchStartDate = $("#start_date").val().trim();
+    var urlStartDate = searchStartDate + "T01%3A00%3A00";
+
+    var searchEndDate = $("#end_date").val().trim();
+    var urlEndDate = searchEndDate + "T01%3A00%3A00";
+
+    if(searchAddress == null || searchAddress == ""){
+      $("#zipSearch").addClass("form-required")
+      $("#zipSearch").append(" Make sure you complete this field");
+    }
+    if (searchStartDate == null || searchStartDate == ""){
+      $("#startDateSearch").addClass("form-required")
+      $("#startDateSearch").append(" Make sure you complete this field");
+    }
+    if (searchEndDate == null || searchEndDate == ""){
+      $("#endDateSearch").addClass("form-required")
+      $("#endDateSearch").append(" Make sure you complete this field");
+    }
+
+    var myURL = "https://www.eventbriteapi.com/v3/events/search/?" + urlTerm + "&" + urlAddress + 
+    "&" + categoriesList + "&location.within=25mi" + "&start_date.range_start=" + urlStartDate +
+    "&start_date.range_end=" + urlEndDate +
+    "&token=C3Y4UW6PHVTZ3JPGDSWF";
+
+    $.ajax({
+    url: myURL,
+    method: "GET"
+    })
+    .done(function(response){
+      $("#eventOut").append("<h1>EventBrite Results: </h1>");
+      for(var k = 0; k < 10; k++){
+        var eventName = response.events[k].name.text;
+        var eventStart = response.events[k].start.local;
+        var eventURL = response.events[k].url;
+
+
+        //----------HTML output for event API results ------
+        var eventSpace = $("<div>")
+        eventSpace.addClass('panel panel-default');
+
+        var eventURLActive = $("<a>");
+        eventURLActive.attr("href", eventURL);
+        eventURLActive.attr("target", "#");
+        eventURLActive.text("Check this event out!!");
+     
+        var eventBtn = $("<div>");
+        eventBtn.addClass("well");
+        eventBtn.addClass("text-center");
+        eventBtn.append(eventURLActive);
+
+        eventSpace.html("<h1>" + eventName + "</h1>");
+        eventSpace.append("<h2>" + eventStart + "</h2>");
+        eventSpace.append(eventBtn);
+        $("#eventOut").append(eventSpace);
+        // ----- END HTML output for event API results -----
+      }
+
+      
+    }) //END of done function for eventBrite API
+
+      var weatherAPIKey = "2bee70835b67699eaad26d5a938fcf32";
+
+      var weatherAPIURL = "http://api.openweathermap.org/data/2.5/forecast/daily?zip=" + searchAddress + "&cnt=6" 
+        + "&appid=" + weatherAPIKey;
+
+      $.ajax({
+        url: weatherAPIURL,
+        method: "GET"
+      })
+      .done(function(snap){
+        $("#weatherOut").append("<h1>6 Day Forecast for your location: </h1>");
+        for (var i = 0; i < snap.list.length; i++){
+          var weatherStart = snap.list[i];
+          var temp = weatherStart.temp.day;
+          var convertTemp = Math.round( (1.8 * (temp - 273)) + 32);
+          var weatherIcon = "http://openweathermap.org/img/w/" + weatherStart.weather[0].icon + ".png";
+
+          //-----HTML for Weather API Response ------
+          var weatherScreen = $("<div>");
+          weatherScreen.addClass("col-md-2");
+          weatherScreen.addClass("well");
+
+          var weatherPic = $("<img>");
+          weatherPic.addClass("img-responsive");
+          weatherPic.attr("src", weatherIcon);
+
+          weatherScreen.append(weatherPic);
+          weatherScreen.append("<h3>" + convertTemp + "&#8457;</h3>");
+
+          $("#weatherOut").append(weatherScreen);
+          //----END HTML for Weather API Response ----
+        }//For loop END to create weather buttons
+      })//Weather API done function
+
+        var clientID = 'NTU5MTQ4NHwxNTA1NTc5ODU4LjQ1'
+        var mySeatGeekURL = "https://api.seatgeek.com/2/events?postal_code="+ searchAddress + "&datetime_local.gte="+ searchStartDate +"&datetime_local.lt="+ searchEndDate +"&client_id="+ clientID + " "
+      
+         $.ajax({
+            url: mySeatGeekURL,
+            method: "GET"
+            })
+            .done(function(response){
+
+              $("#seatOut").append("<h1>SeatGeek Results: </h1>")
+              console.log(mySeatGeekURL);
+              //so I can verify the validity of the search query
+              console.log(response);
+              for (var k = 0; k < response.events.length; k++){
+                var seatName = response.events[k].short_title;
+                var seatURL = response.events[k].url;
+                var seatStart = response.events[k].datetime_local;
+                 //----------HTML output for event API results ------
+                    var seatSpace = $("<div>")
+                    seatSpace.addClass('panel panel-default');
+
+                    var seatURLActive = $("<a>");
+                    seatURLActive.attr("href", seatURL);
+                    seatURLActive.attr("target", "#");
+                    seatURLActive.text("Sounds Awesome, Let Me See The Page!");
+                    var seatBtn = $("<div>");
+                    seatBtn.addClass("well");
+                    seatBtn.addClass("text-center");
+                    seatBtn.append(seatURLActive);
+
+                    seatSpace.html("<h1>" + seatName + "</h1>");
+                    seatSpace.append("<h2>" + seatStart + "</h2>");
+                    seatSpace.append(seatBtn);
+                    $("#seatOut").append(seatSpace);
+                  // ----- END HTML output for event API results -----
+              }
+
+              
+            })
+
+  }) //End of Submit Button Push
+    
+
+
+
+</script>
+
+<footer><br>
+      <div class="container3">
+      <img src="http://www.droiders.com/wp-content/uploads/concierge-1.jpg" id="foot">
+      The Concierge Team
+      </div>
+     </footer><br> 
+
+</body>
+</html>
