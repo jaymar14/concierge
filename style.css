@@ -3,11 +3,11 @@ body{
 }
 
 .jumbotron{
-	background-image: url(http://cloudlightfpv.com/images/bebop/banner.jpg);
-	background-color: transparent;
-	color: royalblue;
-	width: 100%;
-	margin: auto;
+	/*background-image: url(http://cloudlightfpv.com/images/bebop/banner.jpg);*/
+	background-color: navy;
+	color: white;
+	/*width: 100%*/;
+	/*margin: auto;*/
 
 }
 
@@ -31,9 +31,14 @@ body{
 
 footer{
 	text-align: center;
+	background: navy;
+	color: white;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	position: fixed; 
 }
 
-#foot{
-	width: 15%;
-	height: 15%;
-}	
+/*#foot{
+	width: 200px;
+}	*/

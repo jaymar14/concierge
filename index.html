@@ -89,7 +89,6 @@
         <input type="checkbox" id = "hobbies" value = "101">Business and Professional <br>
         <input type="checkbox" id = "music" value = "110">Food and Drink
   </form><br>
-
   <button class = "btn btn-primary" id = "submit-me" type = "button">Submit</button>
 </div>
 
@@ -107,8 +106,11 @@
     <div id="seatOut" class="col-md-6">
     </div>
   </div>
-</div>
 
+  <footer>
+    The Concierge Team | <a href="mailto:">jay.martinez7@yahoo.com</a>
+  </footer><br><br>
+</div>
 
 <script type="text/javascript">
 
@@ -131,11 +133,6 @@ function showDivs(n) {
 }
 
 //EventBrite API Key: "C3Y4UW6PHVTZ3JPGDSWF" 
-
-
-
-
-
   var myArray = [];
 
   function cateFunction() {
@@ -147,8 +144,6 @@ function showDivs(n) {
           }
       }
   }
-
-  
   
   $("#submit-me").on("click", function(){
     event.preventDefault();
@@ -203,7 +198,6 @@ function showDivs(n) {
         var eventStart = response.events[k].start.local;
         var eventURL = response.events[k].url;
 
-
         //----------HTML output for event API results ------
         var eventSpace = $("<div>")
         eventSpace.addClass('panel panel-default');
@@ -224,7 +218,6 @@ function showDivs(n) {
         $("#eventOut").append(eventSpace);
         // ----- END HTML output for event API results -----
       }
-
       
     }) //END of done function for eventBrite API
 
@@ -298,23 +291,11 @@ function showDivs(n) {
                     $("#seatOut").append(seatSpace);
                   // ----- END HTML output for event API results -----
               }
-
               
             })
-
   }) //End of Submit Button Push
-    
+     
+  </script>
 
-
-
-</script>
-
-<footer><br>
-      <div class="container3">
-      <img src="http://www.droiders.com/wp-content/uploads/concierge-1.jpg" id="foot">
-      The Concierge Team
-      </div>
-     </footer><br> 
-
-</body>
+ </body>
 </html>
